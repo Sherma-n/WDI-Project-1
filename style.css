@@ -1,0 +1,71 @@
+/*Default css settings*/
+.gameTitle {
+	margin: 30px;
+	background-color: rgba(80,80,80,.8);
+	display: block;
+}
+.gameBoard {
+	background-color: rgba(140,100,100,.8);
+	margin: 40px 50px 10px 10px;
+	padding: 10px 0 0 0;
+	border: 3px solid black;
+	border-radius: 30px;
+}
+
+.rollButton {
+	display: inline;
+	text-align: center;
+}
+.resetButton {
+}
+
+.diceImg {
+	width: 100px;
+	min-width: 60px;
+}
+
+.betsOne {
+	background-color: rgba(100,100,140,.8);
+	border-radius: 20px;
+	text-align: center;
+	margin: 20px 0px 20px	0;
+	border: 3px solid red;
+	vertical-align: middle;
+}
+
+.betsTwo {
+	background-color: rgba(100,100,140,.8);
+	text-align: left;
+	border: 3px solid red;
+	padding: 0 5px 0 0;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+.betsThree {
+	background-color: rgba(100,100,140,.8);
+	text-align: left;
+	border: 3px solid red;
+	vertical-align: middle;
+	margin: 20px 0px 20px	0;
+}
+
+.panelPlayer {
+	background-color: rgba(100,140,100,.8);
+	border: 3px solid black;
+	border-bottom: none;
+	padding: 0;
+}
+.chips {
+	background-color: rgba(255,140,140,.8);
+	border: 3px solid black;
+	text-align: center;
+	padding: 3px;
+}
+.playerValue {
+	background-color: white;
+	border: 3px solid black;
+	margin: 5px;
+}
+/*default settings end*/
+/*Javascript css*/
