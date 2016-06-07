@@ -93,8 +93,6 @@ $( document ).ready(function() {
 	var wagerValue = 0;
 	// CheckBetWin
 	var boxWin = [];
-	var checkBetWin = 0;
-	var checkWinner = 0;
 	//setting payout attributes
 	$ ("#betBig").attr('payout','2');
 	$ ("#betEven").attr('payout','2');
@@ -147,7 +145,6 @@ $( document ).ready(function() {
 		turnCount += 1;
 	};
 //Check if player can afford chip - add to placeWager Function
-	function chipFrom () {
 	function playerAfford (playerWager, wagerValue) {
 		if (playerWager > wagerValue) {
 	//If payer cannot afford, black background & remove pointer events.
@@ -296,29 +293,70 @@ $( document ).ready(function() {
 			console.log("ERRROR, no WInner??");// <--------------------------------------------------------Remove Afterwards
 		};
 	};
+//resetting all wagers and bets
+	function resetbets () {
+		boxWin = [];
+		wagerValue = 0;
+		playerWager = " ";
+		playerOneBets = 0;
+		playerTwoBets = 0;
+	}
 // Calculate Payout
 	//Setting Payout atributes
 	function Payout ([arr]) {
 		//loop through the win elements.
 		for (var i=0; i>=arr.length; i++) {
 			var payoutMulti = arr[i].getAttribute("payout");
+			//multiply wager value against the payout
 			var payTotal = wagerValue * payoutMulti;
+			//add payout to total value
 			if function (chipFrom) (playerWager === "player1") {
 				player1Value = player1Value + payTotal;
 			} else if function (chipFrom) (playerWager === "player2") {
 				player2Value = player2Value + payTotal;
 			} else {
 				console.log("Error no player to pay to!"); // <--------------------------------------------------------Remove Afterwards
-			}
+			};
 		};
+		alert("ROUND SUMMARY" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+		resetbets();
 	};
+//Check for Winner
+	function checkWinner () {
+		//check if turncount = 5, if so player with higher score wins.
+		if (turnCount >= 5) {
+			if (player1Value > player2Value) {
+				alert("PLAYER 1 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+			} else if (player2Value > player1Value) {
+				alert("PLAYER 2 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+			} else {
+				alert("Draw Game!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+			};
+		} else {
+			//check if any player's value = 0, if so, the opposing wins.
+			if (player1Value <= 0) {
+				alert("PLAYER 2 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+			} else if (player2Value <= 0) {
+				alert("PLAYER 1 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+			} else {
+				alert("Draw Game!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
+			};
+		};
+	}
+//resetting the game
+	$('#resetGame').click(function() {
+    location.reload();
+	});
 
 
-// 	6. Calculate Payout
-// 		6.1 Check if Bet Wins for Bet Box
-// 			6.1.1 If True, Check if wager is present
-// 				6.1.1.1 If True, Proceed to Calculate Payout
-// 			6.1.2 If False, Skip
+// initializing functions
+var initialize = function() {
+
+}
+
+
+
+ 
 
 
 
