@@ -25,121 +25,122 @@
 <!-- Reset Button -->
                 <button type="button" class="resetButton btn btn-secondary btn-lg col-xs-2 col-xs-offset-1" disabled>Reset Game</button>
             </div>
+            <div class="col-xs-1 dieText" id="dieResult">ONE</div>
 <!-- Bets Panel One: Big, Odd, Even & Small -->
             <div class="col-xs-12 panelBetsOne">
 <!-- Bets Big -->
                 <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betBig">
                     <h2 class="betTitle"> Big </h2>
-                    <p class="betText"> >= 7 </p>
-                    <p class="betText"> 1:1 </p>
+                    <p class="betValue"> >= <div class = "winValue">7</div> </p>
+                    <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bets Even -->
                 <div class="col-xs-2 betsOne bets betsOE col-xs-offset-1" id="betEven">
                     <h2 class="betTitle"> Even </h2>
-                    <p class="betText"> 2,4,6,8,10,12 </p>
-                    <p class="betText"> 1:1 </p>
+                    <p class="betValue"> <div class = "winValue">2,4,6,8,10,12</div> </p>
+                    <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bets Odd -->
                 <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betOdd">
                     <h2 class="betTitle"> Odd </h2>
-                    <p class="betText"> 3,5,7,9,11 </p>
-                    <p class="betText"> 1:1 </p>
+                    <p class="betValue"> <div class = "winValue">3,5,7,9,11</div> </p>
+                    <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bets Small -->
                 <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betSmall">
                     <h2 class="betTitle"> Big </h2>
-                    <p class="betText"> >= 7 </p>
-                    <p class="betText"> 1:1 </p>
+                    <p class="betValue"> >= <div class = "winValue">7</div> </p>
+                    <p class="betPayout"> 1:1 </p>
                 </div>                
             </div>
 <!-- Bet Panel Two: Pairs -->
             <div class="col-xs-12 panelBetsTwo">
                  <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairOne">
-                    <h4 class="betTitle"> Pair1 </h4>
-                    <p class="betText"> 1:30 </p>
+                    <h4 class="betValue"> Pair<div class = "WinValue">1</div> </h4>
+                    <p class="betPayout"> 1:30 </p>
                 </div> 
 <!-- Bet Pair Panel 2 -->
                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairTwo">
-                    <h4 class="betTitle"> Pair2 </h4>
-                    <p class="betText"> 1:30 </p>
+                    <h4 class="betValue"> Pair<div class = "winValue">2</div> </h4>
+                    <p class="betPayout"> 1:30 </p>
                 </div>
 <!-- Bet Pair Panel 3 -->
                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairThree">
-                    <h4 class="betTitle"> Pair3 </h4>
-                    <p class="betText"> 1:30 </p>
+                    <h4 class="betValue"> Pair<div class = "winValue">3</div> </h4>
+                    <p class="betPayout"> 1:30 </p>
                 </div> 
 <!-- Bet Pair Panel 4 -->
                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairFour">
-                    <h4 class="betTitle"> Pair4 </h4>
-                    <p class="betText"> 1:30 </p>
+                    <h4 class="betValue"> Pair<div class = "winValue">4</div> </h4>
+                    <p class="betPayout"> 1:30 </p>
                 </div>  
 <!-- Bet Pair Panel 5 -->
                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairFive">
-                    <h4 class="betTitle"> Pair5 </h4>
-                    <p class="betText"> 1:30 </p>
+                    <h4 class="betValue"> Pair<div class = "winValue">5</div> </h4>
+                    <p class="betPayout"> 1:30 </p>
                 </div>
 <!-- Bet Pair Panel 6 -->
                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairSix">
-                    <h4 class="betTitle"> Pair6 </h4>
-                    <p class="betText"> 1:30 </p>
+                    <h4 class="betValue"> Pair<div class = "winValue">6</div> </h4>
+                    <p class="betPayout"> 1:30 </p>
                 </div>  
             </div> 
 <!-- Bet Panel Three: Number -->
             <div class="col-xs-12 panelBetsThree">
 <!-- Bet Number 2 -->
                 <div class="col-xs-1 betsThree bets betsNum col-xs-offset-1" id="betNum2">
-                    <h5 class="betTitle"> 2 </h5>
-                    <p class="betText"> 1:30 </p>
+                    <h5 class="betValue"><div class = "winValue">2</div></h5>
+                    <p class="betPayout"> 1:30 </p>
                 </div>
 <!-- Bet Number 3 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum3">
-                    <h5 class="betTitle"> 3 </h5>
-                    <p class="betText"> 1:15 </p>
+                    <h5 class="betValue"><div class = "winValue">3</div></h5>
+                    <p class="betPayout"> 1:15 </p>
                 </div>
 <!-- Bet Number 4 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum4">
-                    <h5 class="betTitle"> 4 </h5>
-                    <p class="betText"> 1:7 </p>
+                    <h5 class="betValue"><div class = "winValue">4</div></h5>
+                    <p class="betPayout"> 1:7 </p>
                 </div>
 <!-- Bet Number 5 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum5">
-                    <h5 class="betTitle"> 5 </h5>
-                    <p class="betText"> 1:2 </p>
+                    <h5 class="betValue"><div class = "winValue">5</div></h5>
+                    <p class="betPayout"> 1:2 </p>
                 </div>
 <!-- Bet Number 6 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum6">
-                    <h5 class="betTitle"> 6 </h5>
-                    <p class="betText"> 1:1 </p>
+                    <h5 class="betValue"><div class = "winValue">6</div></h5>
+                    <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bet Number 7 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum7">
-                    <h5 class="betTitle"> 7 </h5>
-                    <p class="betText"> 1:2 </p>
+                    <h5 class="betValue"><div class = "winValue">7</div></h5>
+                    <p class="betPayout"> 1:2 </p>
                 </div>
 <!-- Bet Number 8 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum8">
-                    <h5 class="betTitle"> 8 </h5>
-                    <p class="betText"> 1:1 </p>
+                    <h5 class="betValue"><div class = "winValue">8</div></h5>
+                    <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bet Number 9 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum9">
-                    <h5 class="betTitle"> 9 </h5>
-                    <p class="betText"> 1:2 </p>
+                    <h5 class="betValue"><div class = "winValue">9</div></h5>
+                    <p class="betPayout"> 1:2 </p>
                 </div>
 <!-- Bet Number 10 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum10">
-                    <h5 class="betTitle"> 10 </h5>
-                    <p class="betText"> 1:7 </p>
+                    <h5 class="betValue"><div class = "winValue">10</div> </h5>
+                    <p class="betPayout"> 1:7 </p>
                 </div>
 <!-- Bet Number 11 -->
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum11">
-                    <h5 class="betTitle"> 11 </h5>
-                    <p class="betText"> 1:15 </p>
+                    <h5 class="betValue"><div class = "winValue">11</div> </h5>
+                    <p class="betPayout"> 1:15 </p>
                 </div>
  <!-- Bet Number 12 -->               
                 <div class="col-xs-1 betsThree bets betsNum" id="betNum12">
-                    <h5 class="betTitle"> 12 </h5>
-                    <p class="betText"> 1:30 </p>
+                    <h5 class="betValue"><div class = "winValue">12</div></h5>
+                    <p class="betPayout"> 1:30 </p>
                 </div>   
             </div>
 <!-- Player 1 Panel -->
