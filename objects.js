@@ -55,16 +55,16 @@ var Game = function(defaultCredits) {
 
   this.checkWinners = function() {
     switch (true) {
-      case (dice1 === dice 2):
+      case (this.dice.dice1 === this.dice.dice2): this.winners.push("pair" + this.dice.dice1);
+      case (this.dice.total > 1): this.winners.push("bets" + this.dice.total);
+      switch ((this.dice.total%2) === 0) {
+        case (true): this.winners.push("even"); break;
+        case (false): this.winners.push("odd"); break; }
+      switch (this.dice.total >= 7) {
+        case (true): this.winners.push("big"); break;
+        case (false): this.winners.push("small"); break; }
+     };
+    console.log(this.dice.dice1 + " " + this.dice.dice2 + " " + this.dice.total) //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<REMOVE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  };
 
-    }
-    if (dice.dice1 === dice2) { winners.push("pair" + dice1);
-    } else if {
-        if (total >= 7) { winners.push("big");}
-        else { winners.push("small"); };
-    } else if {
-        if (total%2 === 0) { winner.push("even");}
-        else { winner.push("odd"); }
-    } else { winners.push("bets" + total) };
-    };
 };

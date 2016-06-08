@@ -16,11 +16,13 @@ $(document).ready(function(){
 
   // Event Listeners
   $rollGameBtn.on('click', function(){
+    var winners = game.winners;
     game.rollDice();
     game.checkWinners();
     // game.highlightWinner();
     // game.payout();
     // game.clearTable();
+
   });
 
   $chips.on('click', function(){

@@ -1,3 +1,13 @@
+/// 1. Define the bet types on html & bet object
+/// 2. Append a text on html to show bet amounts
+/// 3. RollDice
+//
+
+
+
+
+
+
 // Psuedo Code
 //  1. Determine Player Values
 //    1.1 Set Player Default = 100
@@ -676,3 +686,71 @@ $(document).ready(function() {
 
 
       */
+
+
+    if (dice.dice1 === dice2) { winners.push("pair" + dice1);
+    } else if {
+        if (total >= 7) { winners.push("big");}
+        else { winners.push("small"); };
+    } else if {
+        if (total%2 === 0) { winner.push("even");}
+        else { winner.push("odd"); }
+    } else { winners.push("bets" + total) };
+
+
+
+
+          case (this.dice.total%2 === 0):
+        this.winners.push("even");
+      case (this.dice.total%2 !== 0):
+        this.winners.push("odd");
+
+
+              case (this.dice.total >= 7):
+        this.winners.push("big");
+      case (this.dice.total <= 6):
+        this.winners.push("small");
+
+
+
+
+
+
+            switch (true) {
+      case (this.dice.dice1 === this.dice.dice2):
+        this.winners.push("pair" + this.dice.dice1);
+      case (this.dice.total > 1):
+        this.winners.push("bets" + this.dice.total);
+      switch ((this.dice.total)%2 === 0) {
+        case (true):
+          this.winners.push("even");
+        case (false):
+          this.winners.push("odd");
+      };
+      switch (this.dice.total > 6) {
+        case (true):
+          this.winners.push("big");
+        case (false):
+          this.winners.push("small");
+      };
+    }
+
+
+
+
+
+          if (this.dice.dice1 === this.dice.dice2) {
+        this.winners.push("pair" + this.dice.dice1);
+      } else if (this.dice.total > 1) {
+        this.winners.push("bets" + this.dice.total);
+      } else if ((this.dice.total%2) === 0) {
+        this.winners.push("even");
+      } else if ((this.dice.total%2) !== 0) {
+        this.winners.push("odd");
+      } else if ((this.dice.total) > 6) {
+        this.winners.push("big");
+      } else if ((this.dice.total) < 7) {
+        this.winners.push("small");
+      } else {alert("no Winner? something is wrong.")}
+  console.log(this.dice.dice1 + " " + this.dice.dice2 + " " + this.dice.total)
+  };
