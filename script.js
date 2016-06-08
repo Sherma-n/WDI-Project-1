@@ -75,300 +75,149 @@
 
 $( document ).ready(function() {
 //Define Default Global Variables
-	//The Dices
-	var die1 = document.getElementById('dieOne');
-	var die2 = document.getElementById('dieTwo');
-	var diceSum = 0;
 	//Turns: 5 to victory
 	var turnCount = 0;
-	//Player Values
-	var player1Value = document.getElementById('playerOneValue');
-	var player2Value = document.getElementById('playerTwoValue');
 	// Player Wagers
 	var playerWagers1 = 0;
 	var playerWagers2 = 0;
-	//wager From
-	var playerWager = " ";
 	//total Wagers
 	var wagerValue = 0;
-	// CheckBetWin
-	var boxWin = [];
-	//setting payout attributes
-	$ ("#betBig").attr('payout','2');
-	$ ("#betEven").attr('payout','2');
-	$ ("#betOdd").attr('payout','2')
-	$ ("#betSmall").attr('payout','2')
-	$ ("#betPairOne").attr('payout','5')
-	$ ("#betPairTwo").attr('payout','5')
-	$ ("#betPairThree").attr('payout','5')
-	$ ("#betPairFour").attr('payout','5')
-	$ ("#betPairFive").attr('payout','5')
-	$ ("#betPairSix").attr('payout','5')
-	$ ("#betNum2").attr('payout','30')
-	$ ("#betNum3").attr('payout','15')
-	$ ("#betNum4").attr('payout','7')
-	$ ("#betNum5").attr('payout','3')
-	$ ("#betNum6").attr('payout','2')
-	$ ("#betNum7").attr('payout','3')
-	$ ("#betNum8").attr('payout','2')
-	$ ("#betNum9").attr('payout','3')
-	$ ("#betNum10").attr('payout','7')
-	$ ("#betNum11").attr('payout','15')
-	$ ("#betNum12").attr('payout','30')
-	//betBoxes
+	// Credits per user
+	var defaultCredits = 100;
+	// Coin types
+	var coinsTypes = [10,20,30,40,50];
+
+
+//dices
+	var dices = [];
+	$('.gameBoard .topPanel .dices').each(function(index,value){
+		var $dice = $(value);
+		dices.push({	id: 	$dice.attr('id'),
+						rolls:	$dice.attr('data-value'),				
+		})
+	});
+//Players of the game.
+	var game = [];
+	$('.gameBoard .panelPlayer').each(function(index,value) {
+		var $player = $(value);
+		game.push({			id:		$player.attr('id'),
+							player: $player.attr('data-player'),
+
+							element:$player
+		})
+	})
+//betBoxes & Setting payouts
 	var betBoxes = [];
-	var betBox1 = document.getElementById ('betBig')
-	var betBox2 = document.getElementById ('betEven')
-	var betBox3 = document.getElementById ('betOdd')
-	var betBox4 = document.getElementById ('betSmall')
-	var betBox5 = document.getElementById ('betPairOne')
-	var betBox6 = document.getElementById ('betPairTwo')
-	var betBox7 = document.getElementById ('betPairThree')
-	var betBox8 = document.getElementById ('betPairFour')
-	var betBox9 = document.getElementById ('betPairFive')
-	var betBox10 = document.getElementById ('betPairSix')
-	var betBox11 = document.getElementById ('betNum2')
-	var betBox12 = document.getElementById ('betNum3')
-	var betBox13 = document.getElementById ('betNum4')
-	var betBox14 = document.getElementById ('betNum5')
-	var betBox15 = document.getElementById ('betNum6')
-	var betBox16 = document.getElementById ('betNum7')
-	var betBox17 = document.getElementById ('betNum8')
-	var betBox18 = document.getElementById ('betNum9')
-	var betBox19 = document.getElementById ('betNum10')
-	var betBox20 = document.getElementById ('betNum11')
-	var betBox21 = document.getElementById ('betNum12')
-
-
-//Plus one to turnCount - added to diceRoll function
-	function turnPlusOne () {
-		turnCount += 1;
-	};
-//Check if player can afford chip - add to placeWager Function
-	function playerAfford (playerWager, wagerValue) {
-		if (playerWager > wagerValue) {
-	//If payer cannot afford, black background & remove pointer events.
-			document.getElementsByClassName("chips").this.css("background-color", "rgba(0,0,0,0.6)");
-			document.getElementsByClassName("chips").this.css("pointer-events", "none");
-		} else {
-			console.log("player has sufficient $"); //<------ Remove Later
-		}
-	};
-//wager Values for each chip type - add placeWager function
-	function wagerValues () {
-	//If text on wager = 10, value = 10 etc.
-		if ((this).text() === 10) {
-			wagerValue = 10;
-		} else if ((this).text() === 20) {
-			wagerValue = 20;
-		} else if ((this).text() === 30) {
-			wagerValue = 30;
-		} else if ((this).text() === 40) {
-			wagerValue = 40;
-		} else if ((this).text() === 50) {
-			wagerValue = 50;
-		} else {
-			wagerValue = 0;
-		}
-	};
-//Finding the origin of the chip (p1 or 2) - add to placeWager Function
-	function chipFrom () {
-		var playerWager = " ";
-		var player1 = " ";
-		var player2 = " ";
-		if ((this).class() === "playerOneChips") {
-			playerWager = "player1";
-		} else if ((this).class() === "playerOneChips") {
-			playerWager = "player2";
-		} else {
-			Alert("Error Player Chip not chosen");
-		}
-	};
-//Chips Drag and Drop
-  $(function() {
-    var $dragStart = $( ".chips" ),
-      $dragStop = $( ".bets" ),
-    $( ".draggable" ).draggable({
-	//Chips on start drag
-      start: function() {
-        var wager = wagerValues() { return wagerValue };
-        if (chipFrom() === "player1") {
-		//On Startdrag will remove player value from pool
-        	player1Value = player1Value - wager;
-        } else {
-        	player2Value = player2Value - wager;
-        };
-      },
-	//wager on stop function
-      stop: function() {
-      	var wager = wagerValues() { return wagerValue };
-      	var BetBoxWager = [playerOneBets, playerTwoBets];
-      	var playerOneBets = 0;
-      	var playerTwoBets = 0;
-		//Calculating bets for each player in chips
-      	if (chipFrom() ==== "player1") {
-      		playerOneBets = playerOneBets + wager;
-      	} else {
-      		playerTwoBets = playerTwoBets + wager;
-      	};
-		//Assigning wagers to betboxes
-      	var BetBoxWager = [playerOneBets, playerTwoBets];
-      };
-    });
-//RollDices --used in getWin
-	function rollDices () {
-	//Turn +1
-		turnCount++;
-	//For displaying in dice total
-		var status = document.getElementById('dieResult');
-	//Random rolls for 6 sided dices
-		var d1 = Math.floor(Math.random() * 6) + 1;
-		var d2 = Math.floor(Math.random() * 6) + 1;
-	//Calculating dice totals
-		var diceSum = d1 + d2;
-	//Displaying roll results
-		die1 = d1;
-		die2 = d2;
-		die1.innerHTML = d1;
-		die2.innerHTML = d2;
-	//For displaying in dice total
-		status.innerHTML = "Dice total" + diceSum+".";
-	}
-//Get bet Wins
-	function getBetWins () {
-	//If Pair is Rolled
-		if (die1 === die2) {
-	//Win Condition for the pairs & Highlight Box + push into win array.
-			if (die1 === 1) {
-				betBox5.css("background", "red");
-				boxWin.push("betBox5");
-			} else if (die1 === 2) {
-				betBox6.css("background", "red");
-				boxWin.push("betBox6");
-			} else if (die1 === 3) {
-				betBox7.css("background", "red");
-				boxWin.push("betBox7");
-			} else if (die1 === 4 ) {
-				betBox8.css("background", "red");
-				boxWin.push("betBox8");
-			} else if (die1 === 5 ) {
-				betBox9.css("background", "red");
-				boxWin.push("betBox9");
-			} else {
-				betBox10.css("background", "red");
-				boxWin.push("betBox10");
-			}; 
-	// Win Condition for the big/Small Bets
-		} else if {
-			var Bbets = document.getElementsByClassName(".betsBS .betValue .winValue").getElementById("#betBig");
-			if (diceSum >= Bbets.html()) {
-				betBox1.css("background", "red");
-				boxWin.push("betBox1");
-			} else {
-				betBox4.css("background", "red");
-				boxWin.push("betBox4");
-			}
-	//Win Condition for individual rolls.
-		} else if {
-			var numBets = document.getElementsByClassName(".betsNum .betValue .winValue");
-			if (diceSum == numBets.html()) {
-				this.css("background", "red");
-	//push Win var into boxWin.
-				boxWin.push(this);
-			} else {
-				console.log("Error!, No number in dices")// <--------------------------------------------------------Remove Afterwards
-				}
-	//Win Condition for odd/even
-		} else if {
-			var Ebets = document.getElementsByClassName(".betsOE .betValue .winValue").getElementById("#betEven").html();
-			var Obets = document.getElementsByClassName(".betsOE .betValue .winValue").getElementById("#betOdd").html();
-			if (diceSum%2 === 0) { 
-				Ebets.css("background", "red");
-				boxWin.push(Ebets);
-			} else {
-				Obets.css("background, red");
-				boxWin.push(Obets);
-			};
-		} else {
-			console.log("ERRROR, no WInner??");// <--------------------------------------------------------Remove Afterwards
-		};
-	};
-//resetting all wagers and bets
-	function resetbets () {
-		boxWin = [];
-		wagerValue = 0;
-		playerWager = " ";
-		playerOneBets = 0;
-		playerTwoBets = 0;
-	}
-// Calculate Payout
-	//Setting Payout atributes
-	function Payout ([arr]) {
-		//loop through the win elements.
-		for (var i=0; i>=arr.length; i++) {
-			var payoutMulti = arr[i].getAttribute("payout");
-			//multiply wager value against the payout
-			var payTotal = wagerValue * payoutMulti;
-			//add payout to total value
-			if function (chipFrom) (playerWager === "player1") {
-				player1Value = player1Value + payTotal;
-			} else if function (chipFrom) (playerWager === "player2") {
-				player2Value = player2Value + payTotal;
-			} else {
-				console.log("Error no player to pay to!"); // <--------------------------------------------------------Remove Afterwards
-			};
-		};
-		alert("ROUND SUMMARY" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-		resetbets();
-	};
-//Check for Winner
-	function checkWinner () {
-		//check if turncount = 5, if so player with higher score wins.
-		if (turnCount >= 5) {
-			if (player1Value > player2Value) {
-				alert("PLAYER 1 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-			} else if (player2Value > player1Value) {
-				alert("PLAYER 2 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-			} else {
-				alert("Draw Game!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-			};
-		} else {
-			//check if any player's value = 0, if so, the opposing wins.
-			if (player1Value <= 0) {
-				alert("PLAYER 2 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-			} else if (player2Value <= 0) {
-				alert("PLAYER 1 WINS!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-			} else {
-				alert("Draw Game!" + " Player 1 score =" + player1Value + " Player 2 score =" + player2Value);
-			};
-		};
-	}
-//resetting the game
-	$('#resetGame').click(function() {
-    location.reload();
+	$('.betting .bets').each(function(index,value){
+		var $bet = $(value);
+			betBoxes.push ({	id:		$bet.attr('id'),
+								value:  $bet.data('value'),
+								winCon: $bet.attr('data-winCon'),
+								element:$bet
+		});
+	})
+//player chips
+	var playerchips = [];
+	$('.panelPlayer .chips').each(function(index,value){
+		var $chip = $(value);
+		playerchips.push({		id: 	$chip.attr('id'),
+								value:  $chip.data('value'),
+								element:$chip  
+		});
 	});
 
+/*
+ *	Coin Object 
+ */
+var coin = function(value){
+	var value = playerchips.getValue('value');
 
-// initializing functions
-var initialize = function() {
+	$('.panelPlayer .chips').each(function(index,value){
+		var $chip = $(value);
+		player1chips.push({		id: 	$chip.attr('id'),
+								value:  $chip.data('value'),
+								element:$chip  
+		});
+	});
 
+	this.getValue = function(){
+		return value;
+	}
+}
+
+/*
+ *	Bet Object 
+ */
+var bet = function(payout, winCondition) {
+	var coins = [];
+	var payoutRatio = payout;
+	this.win = winCondition
+}
+
+/*
+ *	Player Object 
+ */
+var player = function(){
+
+	var name = "";
+	var total = 0;
+
+
+
+	function init(){
+		total = defaultCredits;
+	};
+	init();
 }
 
 
 
- 
+
+/*
+ *	Game Object 
+ */
+var game = function() {
+
+	var that = this;
+	var bets = [];
+	var player =[];
+	var coins = [];
+	var turn = 0;
+	var dice = {}
+
+
+	this.rollDice = function() {
+
+		return {
+			dice_1: Math.ceil( Math.random() * 6 ),
+			dice_2: Math.ceil( Math.random() * 6 ),
+			total: dice_1 + dice_2
+		}
+	}
 
 
 
+	this.init = function(){
+
+		bets=[];
+		player[];
+		coin=[];
+		turn=0;
+
+		// init players
+		that.player.push( new player());
+		that.player.push( new player());
+
+		// init bets
+		that.bets.push( new bets(3, function(){
+			return dice > 7;
+		}));
 
 
 
+		// init coins
 
-
-
-
-
-
+}
 
 } // ENd Of Javascript
 

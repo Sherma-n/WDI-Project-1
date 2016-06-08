@@ -18,166 +18,166 @@
 <!--Top Panel: Dices, Roll Button, Reset button -->
             <div class="col-xs-12 topPanel">
 <!-- Dices -->
-                <img class="col-xs-1 dices img-responsive img-rounded" id="dieOne" src="https://openclipart.org/image/800px/svg_to_png/29527/die1.png">
-                <img class="col-xs-1 dices" id="dieTwo" src="https://openclipart.org/image/800px/svg_to_png/29527/die1.png">
+                <img class="col-xs-1 dices img-responsive img-rounded" id="dieOne" data-value="0" src="https://openclipart.org/image/800px/svg_to_png/29527/die1.png">
+                <img class="col-xs-1 dices" id="dieTwo" data-value="0" src="https://openclipart.org/image/800px/svg_to_png/29527/die1.png">
 <!-- Roll Button -->
-                <button type="button" class="rollButton btn btn-lg btn-primary col-xs-6 col-xs-offset-1" disabled>Roll Dices</button>
+                <button type="button" class="rollButton btn btn-lg btn-primary col-xs-6 col-xs-offset-1" id="rollGame" disabled>Roll Dices</button>
 <!-- Reset Button -->
-                <button type="button" class="resetButton btn btn-secondary btn-lg col-xs-2 col-xs-offset-1" disabled>Reset Game</button>
+                <button type="button" class="resetButton btn btn-secondary btn-lg col-xs-2 col-xs-offset-1" id="resetGame" disabled>Reset Game</button>
             </div>
             <div class="col-xs-1 dieText" id="dieResult">ONE</div>
 <!-- Bets Panel One: Big, Odd, Even & Small -->
-            <div class="col-xs-12 panelBetsOne">
+            <div class="col-xs-12 panelBetsOne betting">
 <!-- Bets Big -->
-                <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betBig">
+                <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betBig" data-value="2" data-winCon="[7,8,9,10,11,12]">
                     <h2 class="betTitle"> Big </h2>
                     <p class="betValue"> >= <div class = "winValue">7</div> </p>
                     <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bets Even -->
-                <div class="col-xs-2 betsOne bets betsOE col-xs-offset-1" id="betEven">
+                <div class="col-xs-2 betsOne bets betsOE col-xs-offset-1" id="betEven" data-value="2" data-winCon="[2,4,6,8,10,12]">
                     <h2 class="betTitle"> Even </h2>
                     <p class="betValue"> <div class = "winValue">2,4,6,8,10,12</div> </p>
                     <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bets Odd -->
-                <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betOdd">
+                <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betOdd" data-value="2" data-winCon="[3,5,7,9,11]">
                     <h2 class="betTitle"> Odd </h2>
                     <p class="betValue"> <div class = "winValue">3,5,7,9,11</div> </p>
                     <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bets Small -->
-                <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betSmall">
+                <div class="col-xs-2 betsOne bets betsBS col-xs-offset-1" id="betSmall" data-value="2" data-winCon="[6,5,4,3,2,1]">
                     <h2 class="betTitle"> Big </h2>
                     <p class="betValue"> >= <div class = "winValue">7</div> </p>
                     <p class="betPayout"> 1:1 </p>
                 </div>                
             </div>
 <!-- Bet Panel Two: Pairs -->
-            <div class="col-xs-12 panelBetsTwo">
-                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairOne">
+            <div class="col-xs-12 panelBetsTwo betting">
+                 <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairOne" data-value="30" data-winCon="1">
                     <h4 class="betValue"> Pair<div class = "WinValue">1</div> </h4>
                     <p class="betPayout"> 1:30 </p>
                 </div> 
 <!-- Bet Pair Panel 2 -->
-                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairTwo">
+                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairTwo" data-value="30" data-winCon="2">
                     <h4 class="betValue"> Pair<div class = "winValue">2</div> </h4>
                     <p class="betPayout"> 1:30 </p>
                 </div>
 <!-- Bet Pair Panel 3 -->
-                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairThree">
+                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairThree" data-value="30" data-winCon="3">
                     <h4 class="betValue"> Pair<div class = "winValue">3</div> </h4>
                     <p class="betPayout"> 1:30 </p>
                 </div> 
 <!-- Bet Pair Panel 4 -->
-                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairFour">
+                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairFour" data-value="30" data-winCon="4">
                     <h4 class="betValue"> Pair<div class = "winValue">4</div> </h4>
                     <p class="betPayout"> 1:30 </p>
                 </div>  
 <!-- Bet Pair Panel 5 -->
-                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairFive">
+                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairFive" data-value="30" data-winCon="5">
                     <h4 class="betValue"> Pair<div class = "winValue">5</div> </h4>
                     <p class="betPayout"> 1:30 </p>
                 </div>
 <!-- Bet Pair Panel 6 -->
-                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairSix">
+                <div class="col-xs-1 betsTwo bets betsPairs col-xs-offset-1" id="betPairSix" data-value="30" data-winCon="6">
                     <h4 class="betValue"> Pair<div class = "winValue">6</div> </h4>
                     <p class="betPayout"> 1:30 </p>
                 </div>  
             </div> 
 <!-- Bet Panel Three: Number -->
-            <div class="col-xs-12 panelBetsThree">
+            <div class="col-xs-12 panelBetsThree betting">
 <!-- Bet Number 2 -->
-                <div class="col-xs-1 betsThree bets betsNum col-xs-offset-1" id="betNum2">
+                <div class="col-xs-1 betsThree bets betsNum col-xs-offset-1" id="betNum2" data-value="30" data-winCon="2">
                     <h5 class="betValue"><div class = "winValue">2</div></h5>
                     <p class="betPayout"> 1:30 </p>
                 </div>
 <!-- Bet Number 3 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum3">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum3" data-value="15" data-winCon="3">
                     <h5 class="betValue"><div class = "winValue">3</div></h5>
                     <p class="betPayout"> 1:15 </p>
                 </div>
 <!-- Bet Number 4 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum4">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum4" data-value="7" data-winCon="4">
                     <h5 class="betValue"><div class = "winValue">4</div></h5>
                     <p class="betPayout"> 1:7 </p>
                 </div>
 <!-- Bet Number 5 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum5">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum5" data-value="3" data-winCon="5">
                     <h5 class="betValue"><div class = "winValue">5</div></h5>
                     <p class="betPayout"> 1:2 </p>
                 </div>
 <!-- Bet Number 6 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum6">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum6" data-value="2" data-winCon="6">
                     <h5 class="betValue"><div class = "winValue">6</div></h5>
                     <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bet Number 7 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum7">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum7" data-value="3" data-winCon="7">
                     <h5 class="betValue"><div class = "winValue">7</div></h5>
                     <p class="betPayout"> 1:2 </p>
                 </div>
 <!-- Bet Number 8 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum8">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum8" data-value="1" data-winCon="8">
                     <h5 class="betValue"><div class = "winValue">8</div></h5>
                     <p class="betPayout"> 1:1 </p>
                 </div>
 <!-- Bet Number 9 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum9">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum9" data-value="3" data-winCon="9">
                     <h5 class="betValue"><div class = "winValue">9</div></h5>
                     <p class="betPayout"> 1:2 </p>
                 </div>
 <!-- Bet Number 10 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum10">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum10" data-value="7" data-winCon="10">
                     <h5 class="betValue"><div class = "winValue">10</div> </h5>
                     <p class="betPayout"> 1:7 </p>
                 </div>
 <!-- Bet Number 11 -->
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum11">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum11" data-value="15" data- ="11">
                     <h5 class="betValue"><div class = "winValue">11</div> </h5>
                     <p class="betPayout"> 1:15 </p>
                 </div>
  <!-- Bet Number 12 -->               
-                <div class="col-xs-1 betsThree bets betsNum" id="betNum12">
+                <div class="col-xs-1 betsThree bets betsNum" id="betNum12" data-value="30" data-winCon="12">
                     <h5 class="betValue"><div class = "winValue">12</div></h5>
                     <p class="betPayout"> 1:30 </p>
                 </div>   
             </div>
 <!-- Player 1 Panel -->
-            <div class="col-xs-6 panelPlayer" id="playerPanelOne">
+            <div class="col-xs-6 panelPlayer player1" id="playerPanelOne" data-player="1">
                 <h1 class="playerTitle">Player 1</h1>
 <!-- Player 1 Chips -->
-                <div class="col-xs-1 chips chip10 playerOneChips col-xs-offset-1 draggable" id="p1Chip10"> 10
+                <div class="col-xs-1 chips chip10 playerOneChips col-xs-offset-1 draggable" id="p1Chip10" data-value="10"> 10
                 </div>
-                <div class="col-xs-1 chip20 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip20"> 20
+                <div class="col-xs-1 chip20 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip20" data-value="20"> 20
                 </div>
-                <div class="col-xs-1 chip30 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip30"> 30
+                <div class="col-xs-1 chip30 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip30" data-value="30"> 30
                 </div>
-                <div class="col-xs-1 chip40 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip40"> 40
+                <div class="col-xs-1 chip40 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip40" data-value="40"> 40
                 </div>
-                <div class="col-xs-1 chip50 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip50"> 50
+                <div class="col-xs-1 chip50 chips playerOneChips col-xs-offset-1 draggable" id="p1Chip50" data-value="50"> 50
                 </div>
 <!-- Player 1 Value -->
-                <div class="col-xs-12 playerValue" id="playerOneValue">
+                <div class="col-xs-12 playerValue" id="playerOneValue" data-value='100'>
                     100
                 </div>
             </div>
 <!-- Player 2 Panel -->
-            <div class="col-xs-6 panelPlayer" id="playerPanelTwo">
+            <div class="col-xs-6 panelPlayer player2" id="playerPanelTwo" data-player="2">
                 <h1 class="playerTitle">Player 2</h1>
 <!-- Player 2 Chips -->
-                <div class="col-xs-1 chips chip10 playerTwoChips col-xs-offset-1 draggable" id="p2Chip10"> 10
+                <div class="col-xs-1 chips chip10 playerTwoChips col-xs-offset-1 draggable" id="p2Chip10" data-value="10"> 10
                 </div>
-                <div class="col-xs-1 chip20 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip20"> 20
+                <div class="col-xs-1 chip20 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip20" data-value="20"> 20
                 </div>
-                <div class="col-xs-1 chip30 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip30"> 30
+                <div class="col-xs-1 chip30 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip30" data-value="30"> 30
+                </div> 
+                <div class="col-xs-1 chip40 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip40" data-value="40"> 40
                 </div>
-                <div class="col-xs-1 chip40 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip40"> 40
-                </div>
-                <div class="col-xs-1 chip50 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip50"> 50
+                <div class="col-xs-1 chip50 chips playerTwoChips col-xs-offset-1 draggable" id="p2Chip50" data-value="50"> 50
                 </div>
 <!-- Player 2 Value -->
-                <div class="col-xs-12 playerValue" id="playerTwoValue">
+                <div class="col-xs-12 playerValue" id="playerTwoValue" data-value='100'>
                     100
                 </div>
             </div>
