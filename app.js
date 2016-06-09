@@ -10,19 +10,17 @@ $(document).ready(function(){
   // Game Container Object
   var game = new Game(defaultCredits);
 
-  // System Variables
-
-
-
   // Event Listeners
   $rollGameBtn.on('click', function(){
+    game.clearTable();
     var winners = game.winners;
     game.rollDice();
-    game.checkWinners();
-    // game.highlightWinner();
-    // game.payout();
-    // game.clearTable();
-
+    game.checkWinners(); // creates array of key names as strings
+    game.highLightWins ();
+    game.payout();
+    game.checkGameWinner();
+    // game.highlightWinner(); // takes the array and highlight the boxes
+    // game.payout(); // take the array and for both p1 and p2
   });
 
   $chips.on('click', function(){
@@ -44,9 +42,12 @@ $(document).ready(function(){
     } else {
       currentPlayer.credits       -= betSize;
       currentPlayer.bets[betType] += betSize;
-      $ (this).text('Player' + " bets " + betSize);
-      $ (this).prepend('<img id="theImg" style="max-width: 100px" src="./PokerChips.png"/>')
+      $ (this).css("background-image", "url(./PokerChips.png)");
     }
+  });
+
+  $('#resetGame').on('click', function(){
+    location.reload();
   });
 
   window.debug = game;

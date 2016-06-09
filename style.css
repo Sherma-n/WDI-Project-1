@@ -78,6 +78,11 @@
 	border: 3px solid red;
 	vertical-align: middle;
 }
-.chips {
-	max-width: 20px;
+
+.highlightBox {
+	background-color: rgba(180,180,180, .8);
+}
+
+.betIn {
+	background-color: red;
 }

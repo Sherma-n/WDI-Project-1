@@ -754,3 +754,24 @@ $(document).ready(function() {
       } else {alert("no Winner? something is wrong.")}
   console.log(this.dice.dice1 + " " + this.dice.dice2 + " " + this.dice.total)
   };
+
+
+
+
+
+        if (this.dice.dice1 === this.dice.dice2) {
+        this.winners.push("pair" + this.dice.dice1);
+      } else if (this.dice.total > 1) {
+        this.winners.push("bets" + this.dice.total);
+      } else if ((this.dice.total%2) === 0) {
+        this.winners.push("even");
+      } else if ((this.dice.total%2) !== 0) {
+        this.winners.push("odd");
+      } else if ((this.dice.total) > 6) {
+        this.winners.push("big");
+      } else if ((this.dice.total) < 7) {
+        this.winners.push("small");
+      } else {alert("no Winner? something is wrong.")}
+  console.log(this.dice.dice1 + " " + this.dice.dice2 + " " + this.dice.total)
+  };
+}
