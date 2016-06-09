@@ -76,6 +76,25 @@ var Game = function(defaultCredits) {
     this.dice.dice2 = Math.ceil( Math.random() * 6 );
     this.dice.total = this.dice.dice1 + this.dice.dice2;
     this.turn       ++;
+    $('#dieOne').css("background-size", "contain");
+    $('#dieOne').css("background-repeat","no-repeat");
+    $('#dieTwo').css("background-size", "contain");
+    $('#dieTwo').css("background-repeat","no-repeat");
+    if      (this.dice.dice1 === 1) { $('#dieOne').css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");}
+    else if (this.dice.dice1 === 2) { $('#dieOne').css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");}
+    else if (this.dice.dice1 === 3) { $('#dieOne').css("background-image", "url(http://liarsdice.co/static/face3.png)");}
+    else if (this.dice.dice1 === 4) { $('#dieOne').css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");}
+    else if (this.dice.dice1 === 5) { $('#dieOne').css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}
+    else if (this.dice.dice1 === 6) { $('#dieOne').css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
+    else {};
+    if      (this.dice.dice2 === 1) { $('#dieTwo').css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");}
+    else if (this.dice.dice2 === 2) { $('#dieTwo').css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");}
+    else if (this.dice.dice2 === 3) { $('#dieTwo').css("background-image", "url(http://liarsdice.co/static/face3.png)");}
+    else if (this.dice.dice2 === 4) { $('#dieTwo').css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");}
+    else if (this.dice.dice2 === 5) { $('#dieTwo').css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}
+    else if (this.dice.dice2 === 6) { $('#dieTwo').css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
+    else {};
+
   };
 
   this.checkWinners = function() {
@@ -100,7 +119,11 @@ var Game = function(defaultCredits) {
     for (i = 0 ; i < high.length ; i++) {
       //var light = "#" + high[i];
       var light = high[i]
-      $('#'+ light).css("background-color", "black");
+      $('#'+ light).css("background-color", "white");
+      $('#'+ light).css("border", "3px solid white");
+      $('#'+ light).css("background-image", "url(http://awardswriters.com/wp-content/uploads/Winner-stamp1-e1428843025115.jpg)");
+      $('#'+ light).css("background-size", "contain");
+      $('#'+ light).css("background-repeat", "no-repeat");
     }
   };
 
@@ -131,7 +154,7 @@ var Game = function(defaultCredits) {
     this.winners              = [];
     this.currentPlayer        = ' ';
     this.currentPlayerBetSize = 0;
-    $ (".bets").css("background", "rgba(100,100,140,.8)");
+    $ (".bets").css("background", "green");
   };
 
   this.checkGameWinner = function () {
@@ -148,7 +171,11 @@ var Game = function(defaultCredits) {
     } else {
       console.log("no Winner yet!");
     };
-  }
+  };
 
+  this.updateChips = function () {
+    $('#playerOneValue').text(this.player1.credits);
+    $('#playerTwoValue').text(this.player2.credits);
+  }
 
 };

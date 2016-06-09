@@ -18,12 +18,14 @@ $(document).ready(function(){
     game.checkWinners(); // creates array of key names as strings
     game.highLightWins ();
     game.payout();
-    game.checkGameWinner();
+    game.updateChips();
+
     // game.highlightWinner(); // takes the array and highlight the boxes
     // game.payout(); // take the array and for both p1 and p2
   });
 
   $chips.on('click', function(){
+    game.checkGameWinner();
     var $chip   = $(this);
     var player  = $chip.data("player");
     var betSize = $chip.data("value")
@@ -42,7 +44,10 @@ $(document).ready(function(){
     } else {
       currentPlayer.credits       -= betSize;
       currentPlayer.bets[betType] += betSize;
-      $ (this).css("background-image", "url(./PokerChips.png)");
+      $ (this).css("background-image", "url(http://customcandyexpress.com/graphics/denom.png)");
+      $ (this).css("border", "3px solid white");
+      $ (this).css("background-size", "contain");
+      $ (this).css("background-repeat", "no-repeat");
     }
   });
 
