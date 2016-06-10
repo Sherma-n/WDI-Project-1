@@ -13,19 +13,21 @@ $(document).ready(function(){
   // Event Listeners
   $rollGameBtn.on('click', function(){
     game.clearTable();
+    game.rollSound.play();
     var winners = game.winners;
     game.rollDice();
     game.checkWinners(); // creates array of key names as strings
     game.highLightWins ();
     game.payout();
     game.updateChips();
+    game.checkGameWinner();
 
     // game.highlightWinner(); // takes the array and highlight the boxes
     // game.payout(); // take the array and for both p1 and p2
   });
 
   $chips.on('click', function(){
-    game.checkGameWinner();
+    game.coins.play();
     var $chip   = $(this);
     var player  = $chip.data("player");
     var betSize = $chip.data("value")
@@ -36,6 +38,7 @@ $(document).ready(function(){
 
   $bets.on('click', function(){
     var $OE           = $(this);
+    game.coins.play();
     var betType       = $OE.data("bet-type");
     var currentPlayer = game.currentPlayer;
     var betSize       = game.currentPlayerBetSize;

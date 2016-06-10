@@ -71,6 +71,20 @@ var Game = function(defaultCredits) {
   this.currentPlayer        = 'Denis';
   this.currentPlayerBetSize = 0;
 
+
+  // ====================
+  // Sounds
+  // ====================
+   this.coins = new buzz.sound( "./Money-sound-insert-coin.mp3",
+     { preload: true, loop: false });
+
+   this.rollSound = new buzz.sound( "./Knock-on-door.mp3",
+     { preload: true, loop: false });
+
+   this.winSound = new buzz.sound( "./Happy-music.mp3",
+     { preload: true, loop: false });
+
+
   this.rollDice = function() {
     this.dice.dice1 = Math.ceil( Math.random() * 6 );
     this.dice.dice2 = Math.ceil( Math.random() * 6 );
@@ -157,25 +171,59 @@ var Game = function(defaultCredits) {
     $ (".bets").css("background", "green");
   };
 
-  this.checkGameWinner = function () {
-    if (this.player2.credits <= 0) {
-      alert("Player 1 WINS! " + "Player1 Credits:" + this.player1.credits + " Player2 Credits:" + this.player2.credits);
-    } else if ((this.player1.credits <= 0)) {
-      alert("Player 1 WINS! " + "Player1 Credits:" + this.player1.credits + " Player2 Credits:" + this.player2.credits)
-    } else if (this.turn >= 3) {
-        if (this.player1.credits > this.player2.credits) {
-          alert("Player 1 WINS! " + "Player1 Credits:" + this.player1.credits + " Player2 Credits:" + this.player2.credits);
-        } else {
-          alert("Player 2 WINS! " + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits);
+  // ====================
+  // Noty
+  // ====================
+  this.messageWin1 = function () { noty({
+      text: "Player 1 WINS! " + "Player1 Credits:" + this.player1.credits + " Player2 Credits:" + this.player2.credits + " Press New Game!",
+      animation: {
+          open: 'animated bounceInLeft', // Animate.css class names
+          open: {height: 'toggle'},
+          close: 'animated bounceOutLeft', // Animate.css class names
+          easing: 'swing', // unavailable - no need
+          speed: 300 // unavailable - no need
         }
-    } else {
-      console.log("no Winner yet!");
-    };
+    });
   };
+  this.messageWin2 = function() { noty({
+      text: "Player 2 WINS! " + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits + " Press New Game!",
+      animation: {
+          open: 'animated bounceInLeft', // Animate.css class names
+          open: {height: 'toggle'},
+          close: 'animated bounceOutLeft', // Animate.css class names
+          easing: 'swing', // unavailable - no need
+          speed: 300 // unavailable - no need
+        }
+    });
+  };
+  this.messageDraw = function() { noty({
+      text: "Game Draw!" + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits + " Press New Game!",
+      animation: {
+          open: 'animated bounceInLeft', // Animate.css class names
+          open: {height: 'toggle'},
+          close: 'animated bounceOutLeft', // Animate.css class names
+          easing: 'swing', // unavailable - no need
+          speed: 300 // unavailable - no need
+      }
+    });
+  };
+
+  this.checkGameWinner = function () {
+    if        (this.turn >= 3) {
+        if        (this.player1.credits > this.player2.credits) { this.messageWin1(); }
+        else if   (this.player1.credits < this.player2.credits) { this.messageWin2(); }
+        else                                                    { this.messageDraw(); };
+    } else if (this.player1.credits <= 0 || this.player2.credits <= 0) {
+        if        (this.player1.credits <= 0)                   { this.messageWin1(); }
+        else if   (this.player2.credits <= 0)                   { this.messageWin2(); }
+        else                                                    { this.messageDraw(); };
+      };
+    };
 
   this.updateChips = function () {
     $('#playerOneValue').text(this.player1.credits);
     $('#playerTwoValue').text(this.player2.credits);
-  }
+  };
+
 
 };
