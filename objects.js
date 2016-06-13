@@ -93,8 +93,10 @@ var Game = function(defaultCredits) {
       else if (diceRoll === 5) { $(diceID).css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}
       else                     { $(diceID).css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
    };
-
-   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {         //Sets background & choosing an image.
+// ====================
+// Roll Dice
+// ====================
+   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {           //Sets background & choosing an image.
       $ (dice1).css("background-size", "contain");
       $ (dice1).css("background-repeat","no-repeat");
       $ (dice2).css("background-size", "contain");
@@ -110,7 +112,9 @@ var Game = function(defaultCredits) {
       this.turn       ++;                                                      //Turn Count +1
       this.diceImages('#dieOne', '#dieTwo', this.dice.dice1, this.dice.dice2);
   };
-
+// ====================
+// Check Round Winners
+// ====================
   this.pairWins = function (dice1, dice2) {                                    //Push pairs into win arrays
     if (dice1 === dice2)                        { this.winners.push("pair" + dice1);}
     else                                        {console.log("No Pairs")};
@@ -152,7 +156,9 @@ var Game = function(defaultCredits) {
       $('#'+ light).css("background-repeat", "no-repeat");                   //css effect
     }
   };
-
+// ====================
+// Payouts
+// ====================
   this.payout = function () {                                                //Depositing Payout for wins to each player
     this.calculatePayout("player1", payoutRatio);                            //Depositing Player1
     this.calculatePayout("player2", payoutRatio);                            //Depositing Player2
@@ -181,10 +187,9 @@ var Game = function(defaultCredits) {
     $ (".bets").css("background", "green");                                  //reset gameboard css
   };
 
-  // ====================
-  // Noty
-  // ====================                                                    //Noty - message for winners
-
+// ====================
+// Noty
+// ====================                                                    //Noty - message for winners
 this.messageOnWin = function (Player1, Player2, Player1Credits, Player2Credits) { noty ( {
   text:       Player1 + " WINS!"  + Player1 + "Credits:" + Player1Credits + " ." + Player2 + "Credits:" + Player2Credits,
   animation: {
@@ -197,30 +202,29 @@ this.messageOnWin = function (Player1, Player2, Player1Credits, Player2Credits) 
   });
   this.winSound.play();
 };
+// ====================
+// Check Game Winners
+// ====================
+  this.playerMoreChips = function (Player1Credits, Player2Credits) {
+    if          (Player1Credits > Player2Credits) { this.messageOnWin("Player1", "Player2", Player1Credits,Player2Credits); }
+    else if     (Player1Credits < Player2Credits) { this.messageOnWin("Player2", "Player1", Player2Credits,Player1Credits); }
+    else                                          { this.messageOnWin( "Player1&2", "Player2" , Player2Credits,Player1Credits);}
+  };
 
-this.messageDraw = function() { noty({                                    //Game draw
-  text: "Game Draw!" + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits + " Press New Game!",
-  animation: {
-      open: 'animated bounceInLeft',      // Animate.css class names
-      open: {height: 'toggle'},           //effect for fade in
-      close: 'animated bounceOutLeft',    // Animate.css class names
-      easing: 'swing',                    // unavailable - no need
-      speed: 300                          // unavailable - no need
+  this.checkRoundNumber = function (Player1Credits, Player2Credits) {
+    if          (this.turn >=3)                   { this.playerMoreChips(Player1Credits, Player2Credits);}
+    else                                          { console.log("No Winner Yet!") };
   }
-});
-  this.winSound.play();                     //win sound(unavailable?)
-};
+
+  this.checkLoser = function (Player1Credits, Player2Credits) {
+    if          (Player2Credits <= 0)             { this.messageOnWin("Player1", "Player2", Player1Credits,Player2Credits);}
+    else if     (Player1Credits <= 0)             { this.messageOnWin("Player2", "Player1", Player2Credits,Player1Credits);}
+    else                                          { console.log("No Loser Yet!");}
+  };
 
   this.checkGameWinner = function () {                                      //checking for a game winner
-    if        (this.turn >= 3) {                                            //check if turns is up(3)
-        if        (this.player1.credits > this.player2.credits) { this.messageOnWin("Player1", "Player2", this.player1.credits,this.player2.credits); } //P1 wins
-        else if   (this.player1.credits < this.player2.credits) { this.messageOnWin("Player2", "Player1", this.player2.credits,this.player1.credits); } //P2 wins
-        else                                                    { this.messageDraw(); };//Game Draw
-    } else if (this.player1.credits <= 0 || this.player2.credits <= 0) {    //check if one of the players is broke
-        if        (this.player1.credits <= 0)                   { this.messageOnWin("Player2", "Player1", this.player2.credits,this.player1.credits); } //P1 Wins
-        else if   (this.player2.credits <= 0)                   { this.messageOnWin("Player1", "Player2", this.player1.credits,this.player2.credits); } //P2 wins
-        else                                                    { this.messageDraw(); };//Game Draw
-      };
+    this.checkRoundNumber(this.player1.credits,this.player2.credits);
+    this.checkLoser(this.player1.credits,this.player2.credits);
     };
 
   this.updateChips = function () {                                          //Updating player values (with Payout - bet)
