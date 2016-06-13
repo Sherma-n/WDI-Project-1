@@ -85,51 +85,58 @@ var Game = function(defaultCredits) {
    this.winSound = new buzz.sound( "./Happy-music.mp3",                      //Runs when there is a Winner
      { preload: true, loop: false });
 
+   this.rollImage = function (diceRoll, diceID) {                            // Sets roll image for both dices
+      if      (diceRoll === 1) { $(diceID).css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");}
+      else if (diceRoll === 2) { $(diceID).css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");}
+      else if (diceRoll === 3) { $(diceID).css("background-image", "url(http://liarsdice.co/static/face3.png)");}
+      else if (diceRoll === 4) { $(diceID).css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");}
+      else if (diceRoll === 5) { $(diceID).css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}
+      else                     { $(diceID).css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
+   };
 
-  this.rollDice = function() {                                               //Rolls Both Dices For Random Number Between 1 to 6
-    this.dice.dice1 = Math.ceil( Math.random() * 6 );                        //Rolls Dice 1
-    this.dice.dice2 = Math.ceil( Math.random() * 6 );                        //Rolls Dice 2
-    this.dice.total = this.dice.dice1 + this.dice.dice2;                     //Sum of Dice 1 & 2
-    this.turn       ++;                                                      //Turn Count +1
-    $('#dieOne').css("background-size", "contain");                          //For Dice Image
-    $('#dieOne').css("background-repeat","no-repeat");                       //For Dice Image
-    $('#dieTwo').css("background-size", "contain");                          //For Dice Image
-    $('#dieTwo').css("background-repeat","no-repeat");                       //For Dice Image
-    if      (this.dice.dice1 === 1) { $('#dieOne').css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");}       //Dice Image when random value is 1 for dice1
-    else if (this.dice.dice1 === 2) { $('#dieOne').css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");}                            //Dice Image when random value is 2 for dice1
-    else if (this.dice.dice1 === 3) { $('#dieOne').css("background-image", "url(http://liarsdice.co/static/face3.png)");}
-                                                                             //Dice Image when random value is 3 for dice1
-    else if (this.dice.dice1 === 4) { $('#dieOne').css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");}
-                                                                             //Dice Image when random value is 4 for dice1
-    else if (this.dice.dice1 === 5) { $('#dieOne').css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}                                                        //Dice Image when random value is 5 for dice1
-    else if (this.dice.dice1 === 6) { $('#dieOne').css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
-                                                                             //Dice Image when random value is 6 for dice1
-    else {console.log("Error:No Dice1")};
-    if      (this.dice.dice2 === 1) { $('#dieTwo').css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");}       //Dice Image when random value is 1 for dice2
-    else if (this.dice.dice2 === 2) { $('#dieTwo').css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");}                            //Dice Image when random value is 2 for dice2
-    else if (this.dice.dice2 === 3) { $('#dieTwo').css("background-image", "url(http://liarsdice.co/static/face3.png)");}
-                                                                             //Dice Image when random value is 3 for dice2
-    else if (this.dice.dice2 === 4) { $('#dieTwo').css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");}
-                                                                             //Dice Image when random value is 4 for dice2
-    else if (this.dice.dice2 === 5) { $('#dieTwo').css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}                                                        //Dice Image when random value is 5 for dice2
-    else if (this.dice.dice2 === 6) { $('#dieTwo').css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
-                                                                             //Dice Image when random value is 6 for dice2
-    else {};
+   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {         //Sets background & choosing an image.
+      $ (dice1).css("background-size", "contain");
+      $ (dice1).css("background-repeat","no-repeat");
+      $ (dice2).css("background-size", "contain");
+      $ (dice2).css("background-repeat","no-repeat");
+      this.rollImage (dice1Roll, dice1);
+      this.rollImage (dice2Roll, dice2);
+   };
 
+  this.rollDice = function() {                                                 //Rolls Both Dices For Random Number Between 1 to 6
+      this.dice.dice1 = Math.ceil( Math.random() * 6 );                        //Rolls Dice 1
+      this.dice.dice2 = Math.ceil( Math.random() * 6 );                        //Rolls Dice 2
+      this.dice.total = this.dice.dice1 + this.dice.dice2;                     //Sum of Dice 1 & 2
+      this.turn       ++;                                                      //Turn Count +1
+      this.diceImages('#dieOne', '#dieTwo', this.dice.dice1, this.dice.dice2);
   };
 
-  this.checkWinners = function() {                                           //Check For Winning bets of each round(not game winner)
-    switch (true) {                                                                             //Checking for Pairs
-      case (this.dice.dice1 === this.dice.dice2): this.winners.push("pair" + this.dice.dice1);  //Pushing Pair Value into round bet wins
-      case (this.dice.total > 1):                 this.winners.push("bets" + this.dice.total);
-                                                                                                //Pushing total value into round bet wins
-    switch ((this.dice.total%2) === 0) {                                                        //Checking for add and even
-      case (true):                                this.winners.push("even"); break;             //Push even into round bet wins
-      case (false):                               this.winners.push("odd"); break; }            //Push odd to round bet wins
-    switch (this.dice.total >= 7) {                                                             //Checking for big or small
-      case (true):                                this.winners.push("big"); break;              //Pushing Big to round bet wins
-      case (false):                               this.winners.push("small"); break; }          //Pushing Small to round bet wins
-     };
+  this.pairWins = function (dice1, dice2) {                                    //Push pairs into win arrays
+    if (dice1 === dice2)                        { this.winners.push("pair" + dice1);}
+    else                                        {console.log("No Pairs")};
+  }
+
+  this.diceWins = function (diceTotal) {                                      //Push dices into win arrays
+    if (diceTotal > 1)                          { this.winners.push("bets" + diceTotal);}
+    else                                        {console.log("Error no dice rolls")};
+  }
+
+  this.evenWins = function (diceTotal) {                                      //Push even and odds into win arrays
+    if ((diceTotal%2) === 0)                    { this.winners.push("even"); }
+    else                                        { this.winners.push("odd"); }
+  };
+
+  this.bigWins = function (diceTotal) {                                      //Push big and small into win arrays
+    if (diceTotal >= 7)                         { this.winners.push("big"); }
+    else                                        { this.winners.push("small"); }
+  };
+
+
+  this.checkWinners = function() {                                                              //Check For Winning bets of each round(not game winner)
+    this.pairWins (this.dice.dice1, this.dice.dice2);
+    this.diceWins (this.dice.total);
+    this.evenWins (this.dice.total);
+    this.bigWins  (this.dice.total);
     console.log(this.dice.dice1 + " " + this.dice.dice2 + " " + this.dice.total);               //Logging dice roll returns
     console.log(this.winners)                                                                   //check winning array
   };
@@ -177,51 +184,41 @@ var Game = function(defaultCredits) {
   // ====================
   // Noty
   // ====================                                                    //Noty - message for winners
-  this.messageWin1 = function () { noty({                                    //p1 wins
-      text: "Player 1 WINS! " + "Player1 Credits:" + this.player1.credits + " Player2 Credits:" + this.player2.credits + " Press New Game!",
-      animation: {
-          open: 'animated bounceInLeft',      // Animate.css class names
-          open: {height: 'toggle'},           //effect for fade in
-          close: 'animated bounceOutLeft',    // Animate.css class names
-          easing: 'swing',                    // unavailable - no need
-          speed: 300                          // unavailable - no need
-      }
-    });
-    this.winSound.play();                     //win sound(unavailable?)
-  };
-  this.messageWin2 = function() { noty({                                    //p2 wins
-      text: "Player 2 WINS! " + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits + " Press New Game!",
-      animation: {
-          open: 'animated bounceInLeft',      // Animate.css class names
-          open: {height: 'toggle'},           //effect for fade in
-          close: 'animated bounceOutLeft',    // Animate.css class names
-          easing: 'swing',                    // unavailable - no need
-          speed: 300                          // unavailable - no need
-      }
-    });
-    this.winSound.play();                     //win sound(unavailable?)
-  };
-  this.messageDraw = function() { noty({                                    //Game draw
-      text: "Game Draw!" + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits + " Press New Game!",
-      animation: {
-          open: 'animated bounceInLeft',      // Animate.css class names
-          open: {height: 'toggle'},           //effect for fade in
-          close: 'animated bounceOutLeft',    // Animate.css class names
-          easing: 'swing',                    // unavailable - no need
-          speed: 300                          // unavailable - no need
-      }
-    });
-    this.winSound.play();                     //win sound(unavailable?)
-  };
+
+this.messageOnWin = function (Player1, Player2, Player1Credits, Player2Credits) { noty ( {
+  text:       Player1 + " WINS!"  + Player1 + "Credits:" + Player1Credits + " ." + Player2 + "Credits:" + Player2Credits,
+  animation: {
+    open:     'animated bounceInLeft',       // Animate.css class names
+    open:     {height: 'toggle'},            //effect for fade in
+    close:    'animated bounceOutLeft',      // Animate.css class names
+    easing:   'swing',                       // unavailable - no need
+    speed:    300                            // unavailable - no need
+    }
+  });
+  this.winSound.play();
+};
+
+this.messageDraw = function() { noty({                                    //Game draw
+  text: "Game Draw!" + "Player2 Credits:" + this.player2.credits + " Player1 Credits:" + this.player1.credits + " Press New Game!",
+  animation: {
+      open: 'animated bounceInLeft',      // Animate.css class names
+      open: {height: 'toggle'},           //effect for fade in
+      close: 'animated bounceOutLeft',    // Animate.css class names
+      easing: 'swing',                    // unavailable - no need
+      speed: 300                          // unavailable - no need
+  }
+});
+  this.winSound.play();                     //win sound(unavailable?)
+};
 
   this.checkGameWinner = function () {                                      //checking for a game winner
     if        (this.turn >= 3) {                                            //check if turns is up(3)
-        if        (this.player1.credits > this.player2.credits) { this.messageWin1(); } //P1 wins
-        else if   (this.player1.credits < this.player2.credits) { this.messageWin2(); } //P2 wins
+        if        (this.player1.credits > this.player2.credits) { this.messageOnWin("Player1", "Player2", this.player1.credits,this.player2.credits); } //P1 wins
+        else if   (this.player1.credits < this.player2.credits) { this.messageOnWin("Player2", "Player1", this.player2.credits,this.player1.credits); } //P2 wins
         else                                                    { this.messageDraw(); };//Game Draw
     } else if (this.player1.credits <= 0 || this.player2.credits <= 0) {    //check if one of the players is broke
-        if        (this.player1.credits <= 0)                   { this.messageWin1(); } //P1 Wins
-        else if   (this.player2.credits <= 0)                   { this.messageWin2(); } //P2 wins
+        if        (this.player1.credits <= 0)                   { this.messageOnWin("Player2", "Player1", this.player2.credits,this.player1.credits); } //P1 Wins
+        else if   (this.player2.credits <= 0)                   { this.messageOnWin("Player1", "Player2", this.player1.credits,this.player2.credits); } //P2 wins
         else                                                    { this.messageDraw(); };//Game Draw
       };
     };
