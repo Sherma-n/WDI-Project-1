@@ -76,13 +76,14 @@ var Game = function(defaultCredits) {
   // ====================
   // Sounds
   // ====================
-   this.coins = new buzz.sound( "./Money-sound-insert-coin.mp3",             //Runs when Chips clicked & Bets Clicks
-     { preload: true, loop: false });
+   this.coins = new buzz.sound( "./Money-sound-insert-coin.mp3", { preload: true, loop: false });
 
    this.rollSound = new buzz.sound( "./Knock-on-door.mp3", { preload: true, loop: false });
 
    this.winSound = new buzz.sound( "./Happy-music.mp3", { preload: true, loop: false });
-
+// ====================
+// Roll Dice
+// ====================
    this.rollImage = function (diceRoll, diceID) {
       switch (diceRoll) {
         case 1:
@@ -105,10 +106,8 @@ var Game = function(defaultCredits) {
           break;
       };
    };
-// ====================
-// Roll Dice
-// ====================
-   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {           //Sets background & choosing an image.
+
+   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {                    //Sets background & choosing an image.
       $ (dice1).css("background-size", "contain");
       $ (dice1).css("background-repeat","no-repeat");
       $ (dice2).css("background-size", "contain");
@@ -117,11 +116,11 @@ var Game = function(defaultCredits) {
       this.rollImage (dice2Roll, dice2);
    };
 
-  this.rollDice = function() {                                                 //Rolls Both Dices For Random Number Between 1 to 6
-      this.dice.dice1 = Math.ceil( Math.random() * 6 );                        //Rolls Dice 1
-      this.dice.dice2 = Math.ceil( Math.random() * 6 );                        //Rolls Dice 2
-      this.dice.total = this.dice.dice1 + this.dice.dice2;                     //Sum of Dice 1 & 2
-      this.turn       ++;                                                      //Turn Count +1
+  this.rollDice = function() {                                                         //Rolls Both Dices For Random Number Between 1 to 6
+      this.dice.dice1         = Math.ceil( Math.random() * 6 );                        //Rolls Dice 1
+      this.dice.dice2         = Math.ceil( Math.random() * 6 );                        //Rolls Dice 2
+      this.dice.total         = this.dice.dice1 + this.dice.dice2;                     //Sum of Dice 1 & 2
+      this.turn               ++;                                                      //Turn Count +1
       this.diceImages('#dieOne', '#dieTwo', this.dice.dice1, this.dice.dice2);
   };
 // ====================
@@ -132,17 +131,17 @@ var Game = function(defaultCredits) {
     else                                        {console.log("No Pairs")};
   }
 
-  this.diceWins = function (diceTotal) {                                      //Push dices into win arrays
+  this.diceWins = function (diceTotal)    {                                      //Push dices into win arrays
     if (diceTotal > 1)                          { this.winners.push("bets" + diceTotal);}
     else                                        {console.log("Error no dice rolls")};
   }
 
-  this.evenWins = function (diceTotal) {                                      //Push even and odds into win arrays
+  this.evenWins = function (diceTotal)    {                                      //Push even and odds into win arrays
     if ((diceTotal%2) === 0)                    { this.winners.push("even"); }
     else                                        { this.winners.push("odd"); }
   };
 
-  this.bigWins = function (diceTotal) {                                      //Push big and small into win arrays
+  this.bigWins = function (diceTotal)     {                                      //Push big and small into win arrays
     if (diceTotal >= 7)                         { this.winners.push("big"); }
     else                                        { this.winners.push("small"); }
   };
