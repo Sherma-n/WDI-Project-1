@@ -79,19 +79,31 @@ var Game = function(defaultCredits) {
    this.coins = new buzz.sound( "./Money-sound-insert-coin.mp3",             //Runs when Chips clicked & Bets Clicks
      { preload: true, loop: false });
 
-   this.rollSound = new buzz.sound( "./Knock-on-door.mp3",                   //Runs when Roll is Clicked
-     { preload: true, loop: false });
+   this.rollSound = new buzz.sound( "./Knock-on-door.mp3", { preload: true, loop: false });
 
-   this.winSound = new buzz.sound( "./Happy-music.mp3",                      //Runs when there is a Winner
-     { preload: true, loop: false });
+   this.winSound = new buzz.sound( "./Happy-music.mp3", { preload: true, loop: false });
 
-   this.rollImage = function (diceRoll, diceID) {                            // Sets roll image for both dices
-      if      (diceRoll === 1) { $(diceID).css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");}
-      else if (diceRoll === 2) { $(diceID).css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");}
-      else if (diceRoll === 3) { $(diceID).css("background-image", "url(http://liarsdice.co/static/face3.png)");}
-      else if (diceRoll === 4) { $(diceID).css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");}
-      else if (diceRoll === 5) { $(diceID).css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");}
-      else                     { $(diceID).css("background-image", "url(http://www.zonkthegame.com/img/6.png)");}
+   this.rollImage = function (diceRoll, diceID) {
+      switch (diceRoll) {
+        case 1:
+          $(diceID).css("background-image", "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)");
+          break;
+        case 2:
+          $(diceID).css("background-image", "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)");
+          break;
+        case 3:
+          $(diceID).css("background-image", "url(http://liarsdice.co/static/face3.png)");
+          break;
+        case 4:
+          $(diceID).css("background-image", "url(http://dobbelsteen.virtuworld.net/img/4c.gif)");
+          break;
+        case 5:
+          $(diceID).css("background-image", "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)");
+          break;
+        case 6:
+          $(diceID).css("background-image", "url(http://www.zonkthegame.com/img/6.png)");
+          break;
+      };
    };
 // ====================
 // Roll Dice
@@ -146,9 +158,9 @@ var Game = function(defaultCredits) {
   };
 
   this.highLightWins = function () {                                         //Hightling "BetBoxes that are in the winng array"
-    var high = this.winners;                                                 //Pushing to winning array
+    var high         = this.winners;                                         //Pushing to winning array
     for (i = 0 ; i < high.length ; i++) {                                    //Looping through the array
-      var light = high[i]
+      var light      = high[i]
       $('#'+ light).css("background-color", "white");                        //css effect
       $('#'+ light).css("border", "3px solid white");                        //css effect
       $('#'+ light).css("background-image", "url(http://awardswriters.com/wp-content/uploads/Winner-stamp1-e1428843025115.jpg)");
@@ -167,14 +179,14 @@ var Game = function(defaultCredits) {
   };
 
   this.calculatePayout = function (player, payoutRatio) {                    //Calculating amount for payout
-    var player               = this[player];                                 //Determine Player
+    var player                  = this[player];                                 //Determine Player
     for (var betName in player.bets) {                                       //For loop to get each bet
-      var amount             = player.bets[betName];                         //Amount Player Bet in
-      var winnerIndex        = this.winners.indexOf(betName);                //Winning bets this round
+      var amount                = player.bets[betName];                         //Amount Player Bet in
+      var winnerIndex           = this.winners.indexOf(betName);                //Winning bets this round
       if (amount && winnerIndex >= 0) {                                      //if bet made + bet won
-        ratio                = payoutRatio[betName];                         //Calculate payout
-        player.credits       += amount * ratio;                              //add payout to player
-        player.bets[betName] = 0;                                            //Reset payer bets
+        ratio                   = payoutRatio[betName];                         //Calculate payout
+        player.credits          += amount * ratio;                              //add payout to player
+        player.bets[betName]    = 0;                                            //Reset payer bets
       }
     };
   };
