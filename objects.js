@@ -65,13 +65,13 @@ var Player = function(name, credits){
 // Game Object - Game Objects and Functions
 // ====================
 var Game = function(defaultCredits) {
-  this.turn                 = 0;                                             //Check Game Winner
-  this.player1              = new Player("Denis", defaultCredits);           //Payout & Check Game Winner
-  this.player2              = new Player("Jens", defaultCredits);            //Payout & Check Game Winner
-  this.dice                 = {};                                            //rollDice
-  this.winners              = [];                                            //Array of strings that matches the name of bets
-  this.currentPlayer        = 'Denis';                                       //Player that just clicked on Chips
-  this.currentPlayerBetSize = 0;                                             //Player bet that just selected CHips
+  this.turn                 = 0;                                                                //Check Game Winner
+  this.player1              = new Player("Denis", defaultCredits);                              //Payout & Check Game Winner
+  this.player2              = new Player("Jens", defaultCredits);                               //Payout & Check Game Winner
+  this.dice                 = {};                                                               //rollDice
+  this.winners              = [];                                                               //Array of strings that matches the name of bets
+  this.currentPlayer        = 'Denis';                                                          //Player that just clicked on Chips
+  this.currentPlayerBetSize = 0;                                                                //Player bet that just selected CHips
 
   // ====================
   // Sounds
@@ -86,30 +86,31 @@ var Game = function(defaultCredits) {
 // Roll Dice
 // ====================
    this.rollImage = function (diceRoll, diceID) {
+    var picture = "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)";
       switch (diceRoll) {
         case 1:
-          var picture = "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)";
+          picture = "url(http://www.clipartkid.com/images/170/dice-faces-clipart-1-9-reaching-teachers-labd0b-clipart.png)";
           break;
         case 2:
-          var picture = "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)";
+          picture = "url(http://i363.photobucket.com/albums/oo79/fizzgig2k4/dice%20face%20images/lego2dice-1-2.jpg)";
           break;
         case 3:
-          var picture = "url(http://liarsdice.co/static/face3.png)";
+          picture = "url(http://liarsdice.co/static/face3.png)";
           break;
         case 4:
-          var picture = "url(http://dobbelsteen.virtuworld.net/img/4c.gif)";
+          picture = "url(http://dobbelsteen.virtuworld.net/img/4c.gif)";
           break;
         case 5:
-          var picture = "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)";
+          picture = "url(https://upload.wikimedia.org/wikipedia/commons/5/55/Alea_5.png)";
           break;
         case 6:
-          var picture = "url(http://www.zonkthegame.com/img/6.png)";
+          picture = "url(http://www.zonkthegame.com/img/6.png)";
           break;
       }
       $(diceID).css("background-image", picture);
    };
 
-   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {                    //Sets background & choosing an image.
+   this.diceImages = function (dice1, dice2, dice1Roll, dice2Roll) {                            //Sets background & choosing an image.
       $ (dice1).css("background-size", "contain");
       $ (dice1).css("background-repeat","no-repeat");
       $ (dice2).css("background-size", "contain");
@@ -118,37 +119,36 @@ var Game = function(defaultCredits) {
       this.rollImage (dice2Roll, dice2);
    };
 
-  this.rollDice = function() {                                                         //Rolls Both Dices For Random Number Between 1 to 6
-      this.dice.dice1         = Math.ceil( Math.random() * 6 );                        //Rolls Dice 1
-      this.dice.dice2         = Math.ceil( Math.random() * 6 );                        //Rolls Dice 2
-      this.dice.total         = this.dice.dice1 + this.dice.dice2;                     //Sum of Dice 1 & 2
-      this.turn               ++;                                                      //Turn Count +1
+  this.rollDice = function() {                                                                  //Rolls Both Dices For Random Number Between 1 to 6
+      this.dice.dice1         = Math.ceil( Math.random() * 6 );                                 //Rolls Dice 1
+      this.dice.dice2         = Math.ceil( Math.random() * 6 );                                 //Rolls Dice 2
+      this.dice.total         = this.dice.dice1 + this.dice.dice2;                              //Sum of Dice 1 & 2
+      this.turn               ++;                                                               //Turn Count +1
       this.diceImages('#dieOne', '#dieTwo', this.dice.dice1, this.dice.dice2);
   };
 
 // ====================
 // Check Round Winners
 // ====================
-  this.pairWins = function (dice1, dice2) {                                    //Push pairs into win arrays
+  this.pairWins = function (dice1, dice2) {                                                     //Push pairs into win arrays
     if (dice1 === dice2)                        { this.winners.push("pair" + dice1);}
     else                                        {console.log("No Pairs")}
   }
 
-  this.diceWins = function (diceTotal)    {                                      //Push dices into win arrays
+  this.diceWins = function (diceTotal)    {                                                     //Push dices into win arrays
     if (diceTotal > 1)                          { this.winners.push("bets" + diceTotal)}
     else                                        {console.log("Error no dice rolls")}
   }
 
-  this.evenWins = function (diceTotal)    {                                      //Push even and odds into win arrays
+  this.evenWins = function (diceTotal)    {                                                     //Push even and odds into win arrays
     if ((diceTotal%2) === 0)                    { this.winners.push("even");}
     else                                        { this.winners.push("odd");}
   };
 
-  this.bigWins = function (diceTotal)     {                                      //Push big and small into win arrays
+  this.bigWins = function (diceTotal)     {                                                     //Push big and small into win arrays
     if (diceTotal >= 7)                         { this.winners.push("big");}
     else                                        { this.winners.push("small");}
   };
-
 
   this.checkWinners = function() {                                                              //Check For Winning bets of each round(not game winner)
     this.pairWins (this.dice.dice1, this.dice.dice2);
@@ -159,60 +159,60 @@ var Game = function(defaultCredits) {
     console.log(this.winners)                                                                   //check winning array
   };
 
-  this.highLightWins = function () {                                         //Hightling "BetBoxes that are in the winng array"
-    var high         = this.winners;                                         //Pushing to winning array
-    for (i = 0 ; i < high.length ; i++) {                                    //Looping through the array
+  this.highLightWins = function () {                                                            //Hightling "BetBoxes that are in the winng array"
+    var high         = this.winners;                                                            //Pushing to winning array
+    for (i = 0 ; i < high.length ; i++) {                                                       //Looping through the array
       var light      = high[i]
-      $('#'+ light).css("background-color", "white");                        //css effect
-      $('#'+ light).css("border", "3px solid white");                        //css effect
+      $('#'+ light).css("background-color", "white");                                           //css effect
+      $('#'+ light).css("border", "3px solid white");                                           //css effect
       $('#'+ light).css("background-image", "url(http://awardswriters.com/wp-content/uploads/Winner-stamp1-e1428843025115.jpg)");
-      $('#'+ light).css("background-size", "contain");                       //css effect
-      $('#'+ light).css("background-repeat", "no-repeat");                   //css effect
+      $('#'+ light).css("background-size", "contain");                                          //css effect
+      $('#'+ light).css("background-repeat", "no-repeat");                                      //css effect
     }
   };
 
 // ====================
 // Payouts
 // ====================
-  this.payout = function () {                                                //Depositing Payout for wins to each player
-    this.calculatePayout("player1", payoutRatio);                            //Depositing Player1
-    this.calculatePayout("player2", payoutRatio);                            //Depositing Player2
-    this.player1.bets = [];                                                  //Round bets for p1
-    this.player2.bets = [];                                                  //Round bets for p2
+  this.payout = function () {                                                                   //Depositing Payout for wins to each player
+    this.calculatePayout("player1", payoutRatio);                                               //Depositing Player1
+    this.calculatePayout("player2", payoutRatio);                                               //Depositing Player2
+    this.player1.bets = [];                                                                     //Round bets for p1
+    this.player2.bets = [];                                                                     //Round bets for p2
   };
 
-  this.calculatePayout = function (player, payoutRatio) {                    //Calculating amount for payout
-    var player                  = this[player];                                 //Determine Player
-    for (var betName in player.bets) {                                       //For loop to get each bet
-      var amount                = player.bets[betName];                         //Amount Player Bet in
-      var winnerIndex           = this.winners.indexOf(betName);                //Winning bets this round
-      if (amount && winnerIndex >= 0) {                                      //if bet made + bet won
-        ratio                   = payoutRatio[betName];                         //Calculate payout
-        player.credits          += amount * ratio;                              //add payout to player
-        player.bets[betName]    = 0;                                            //Reset payer bets
+  this.calculatePayout = function (player, payoutRatio) {                                       //Calculating amount for payout
+    var player                  = this[player];                                                 //Determine Player
+    for (var betName in player.bets) {                                                          //For loop to get each bet
+      var amount                = player.bets[betName];                                         //Amount Player Bet in
+      var winnerIndex           = this.winners.indexOf(betName);                                //Winning bets this round
+      if (amount && winnerIndex >= 0) {                                                         //if bet made + bet won
+        ratio                   = payoutRatio[betName];                                         //Calculate payout
+        player.credits          += amount * ratio;                                              //add payout to player
+        player.bets[betName]    = 0;                                                            //Reset payer bets
       }
     }
   };
 
-  this.clearTable = function() {                                             //clearing the table at the end of each round
-    this.dice                 = {};                                          //reset dices
-    this.winners              = [];                                          //reset winners
-    this.currentPlayer        = ' ';                                         //reset playing player
-    this.currentPlayerBetSize = 0;                                           //reset bets
-    $ (".bets").css("background", "green");                                  //reset gameboard css
+  this.clearTable = function() {                                                                //clearing the table at the end of each round
+    this.dice                 = {};                                                             //reset dices
+    this.winners              = [];                                                             //reset winners
+    this.currentPlayer        = ' ';                                                            //reset playing player
+    this.currentPlayerBetSize = 0;                                                              //reset bets
+    $ (".bets").css("background", "green");                                                     //reset gameboard css
   };
 
 // ====================
 // Noty
-// ====================                                                    //Noty - message for winners
+// ====================                                                                         //Noty - message for winners
 this.messageOnWin = function (Player1, Player2, Player1Credits, Player2Credits) { noty ( {
   text:       Player1 + " WINS!"  + Player1 + "Credits:" + Player1Credits + " ." + Player2 + "Credits:" + Player2Credits,
   animation: {
-    open:     'animated bounceInLeft',       // Animate.css class names
-    open:     {height: 'toggle'},            //effect for fade in
-    close:    'animated bounceOutLeft',      // Animate.css class names
-    easing:   'swing',                       // unavailable - no need
-    speed:    300                            // unavailable - no need
+    open:     'animated bounceInLeft',                                                          // Animate.css class names
+    open:     {height: 'toggle'},                                                               //effect for fade in
+    close:    'animated bounceOutLeft',                                                         // Animate.css class names
+    easing:   'swing',                                                                          // unavailable - no need
+    speed:    300                                                                               // unavailable - no need
     }
   });
   this.winSound.play();
@@ -237,13 +237,13 @@ this.messageOnWin = function (Player1, Player2, Player1Credits, Player2Credits) 
     else                                          { console.log("No Loser Yet!");}
   };
 
-  this.checkGameWinner = function () {                                      //checking for a game winner
+  this.checkGameWinner = function () {                                                           //checking for a game winner
     this.checkRoundNumber(this.player1.credits,this.player2.credits);
     this.checkLoser(this.player1.credits,this.player2.credits);
     };
 
-  this.updateChips = function () {                                          //Updating player values (with Payout - bet)
-    $('#playerOneValue').text(this.player1.credits);                        //P1
-    $('#playerTwoValue').text(this.player2.credits);                        //P2
+  this.updateChips = function () {                                                               //Updating player values (with Payout - bet)
+    $('#playerOneValue').text(this.player1.credits);                                             //P1
+    $('#playerTwoValue').text(this.player2.credits);                                             //P2
   };
 };//Game Objects & Functions END
